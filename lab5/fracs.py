@@ -13,14 +13,19 @@ def div_frac(frac1, frac2):       # frac1 / frac2
     return mul_frac(frac1, [frac2[1], frac2[0]])
 
 def is_positive(frac):             # bool, czy dodatni
-    if frac[0] >= 0 and frac[1] > 0: return True
-    elif frac[0] <
+    if frac[0] > 0 and frac[1] > 0 or frac[0] < 0 and frac[1] < 0: return True
+    else: return False
 
-def is_zero(frac): pass                 # bool, typu [0, x]
+def is_zero(frac):                # bool, typu [0, x]
+     return frac[0] == 0
 
-def cmp_frac(frac1, frac2): pass        # -1 | 0 | +1
+def cmp_frac(frac1, frac2):        # -1 | 0 | +1
+    if sub_frac(frac1, frac2)[0] == 0: return 0
+    elif frac2float(frac1) - frac2float(frac2) > 0: return 1
+    else: return -1
 
-def frac2float(frac): pass              # konwersja do float
+def frac2float(frac):             # konwersja do float
+    return float(frac[0] / frac[1])
 
 
 # f1 = [-1, 2]      # -1/2
@@ -49,13 +54,27 @@ class TestFractions(unittest.TestCase):
     def test_div_frac(self): 
         self.assertEqual(div_frac([4, 2], [2, 1]), [4, 4])
 
-    def test_is_positive(self): pass
+    def test_is_positive(self):
+        self.assertEqual(is_positive([1, 2]), True)
+        self.assertEqual(is_positive([-1, -2]), True)
+        self.assertEqual(is_positive([0, 2]), False)
+        self.assertEqual(is_positive([-1, 2]), False)
+        self.assertEqual(is_positive([1, -2]), False)
 
-    def test_is_zero(self): pass
 
-    def test_cmp_frac(self): pass
+    def test_is_zero(self): 
+        self.assertEqual(is_zero([0, 2]), True)
+        self.assertEqual(is_zero([1, 2]), False)
 
-    def test_frac2float(self): pass
+
+    def test_cmp_frac(self):
+        self.assertEqual(cmp_frac([1, 2], [2, 2]), -1)
+        self.assertEqual(cmp_frac([2, 2], [1, 2]), 1)
+        self.assertEqual(cmp_frac([1, 2], [1, 2]), 0)
+
+    def test_frac2float(self):
+        self.assertEqual(frac2float([1, 2]), 0.5)
+        self.assertEqual(frac2float([3, 10]), 0.3)
 
     def tearDown(self): pass
 
