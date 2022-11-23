@@ -4,8 +4,8 @@ class Rectangle:
     """Klasa reprezentująca prostokąt na płaszczyźnie."""
 
     def __init__(self, x1, y1, x2, y2):
-        self.pt1 = Point(x1, y1)
-        self.pt2 = Point(x2, y2)
+        self.pt1 = Point(x1, y1)    # lewy dolny
+        self.pt2 = Point(x2, y2)    # prawy gorny
 
     def __str__(self):         # "[(x1, y1), (x2, y2)]"
         return '[({}, {}), ({}, {})]'.format(self.pt1.x, self.pt1.y, self.pt2.x, self.pt2.y)
@@ -37,41 +37,41 @@ import unittest
 
 class TestRectangle(unittest.TestCase):
     def testStr(self):
-        rec = Rectangle(1, 4, 4, 4)
-        self.assertEqual('[(1, 4), (4, 4)]', rec.__str__())
+        rec = Rectangle(0, 0, 4, 4)
+        self.assertEqual('[(0, 0), (4, 4)]', rec.__str__())
 
     def testRepr(self):
         rec = Rectangle(1, 4, 4, 4)
         self.assertEqual('Rectangle(1, 4, 4, 4)', rec.__repr__())
 
     def testEq(self):
-        rec1 = Rectangle(1, 4, 4, 4)
-        rec2 = Rectangle(1, 4, 4, 4)
-        rec3 = Rectangle(1, 4, 4, 2)
+        rec1 = Rectangle(0, 0, 4, 4)
+        rec2 = Rectangle(0, 0, 4, 4)
+        rec3 = Rectangle(0, 0, 5, 5)
         self.assertTrue(rec1.__eq__(rec2))
         self.assertTrue(rec1 == rec2)
         self.assertFalse(rec1.__eq__(rec3))
         self.assertFalse(rec1 == rec3)
     
     def testNe(self):
-        rec1 = Rectangle(1, 4, 4, 4)
-        rec2 = Rectangle(1, 4, 4, 4)
-        rec3 = Rectangle(1, 4, 4, 2)
+        rec1 = Rectangle(0, 0, 4, 4)
+        rec2 = Rectangle(0, 0, 4, 4)
+        rec3 = Rectangle(0, 0, 5, 5)
         self.assertFalse(rec1.__ne__(rec2))
         self.assertTrue(rec1.__ne__(rec3))
     
     def testCenter(self):
-        rec = Rectangle(0, 4, 4, 4)
-        self.assertTrue(Point(0, 2), rec.center())
+        rec = Rectangle(0, 0, 4, 4)
+        self.assertTrue(Point(2, 2), rec.center())
     
     def testArea(self):
-        rec = Rectangle(0, 4, 4, 4)
+        rec = Rectangle(0, 0, 4, 4)
         self.assertTrue(16, rec.area())
     
     def testMove(self):
-        rec = Rectangle(0, 4, 4, 4)
+        rec = Rectangle(0, 0, 4, 4)
         rec.move(2, 2)
-        self.assertTrue(Rectangle(2, 6, 6, 6), rec)
+        self.assertTrue(Rectangle(2, 2, 6, 6), rec)
 
 
 if __name__ == '__main__':
