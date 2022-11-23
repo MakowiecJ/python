@@ -41,8 +41,8 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual('[(0, 0), (4, 4)]', rec.__str__())
 
     def testRepr(self):
-        rec = Rectangle(1, 4, 4, 4)
-        self.assertEqual('Rectangle(1, 4, 4, 4)', rec.__repr__())
+        rec = Rectangle(0, 0, 4, 4)
+        self.assertEqual('Rectangle(0, 0, 4, 4)', rec.__repr__())
 
     def testEq(self):
         rec1 = Rectangle(0, 0, 4, 4)
