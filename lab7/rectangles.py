@@ -5,14 +5,21 @@ class Rectangle:
 
     def __init__(self, x1, y1, x2, y2):
     # Chcemy, aby x1 < x2, y1 < y2.
-        self.pt1 = Point(x1, y1)
-        self.pt2 = Point(x2, y2)
+        if x1 > x2 or y1 > y2:
+            raise ValueError
+        else:
+            self.pt1 = Point(x1, y1)
+            self.pt2 = Point(x2, y2)
+        
 
-    def __str__(self): pass         # "[(x1, y1), (x2, y2)]"
+    def __str__(self):         # "[(x1, y1), (x2, y2)]"
+        return '[({}, {}), ({}, {})]'.format(self.pt1.x, self.pt1.y, self.pt2.x, self.pt2.y)
 
-    def __repr__(self): pass        # "Rectangle(x1, y1, x2, y2)"
+    def __repr__(self):        # "Rectangle(x1, y1, x2, y2)"
+        return 'Rectangle({}, {}, {}, {})'.format(self.pt1.x, self.pt1.y, self.pt2.x, self.pt2.y)
 
-    def __eq__(self, other): pass   # obsługa rect1 == rect2
+    def __eq__(self, other):   # obsługa rect1 == rect2
+        return self.pt1.__eq__(other.pt1) and self.pt2.__eq__(other.pt2)
 
     def __ne__(self, other):        # obsługa rect1 != rect2
         return not self == other
