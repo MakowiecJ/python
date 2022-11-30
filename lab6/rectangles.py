@@ -20,10 +20,10 @@ class Rectangle:
         return not self == other
 
     def center(self):          # zwraca środek prostokąta
-        return Point(self.pt2.x - self.pt1.x, self.pt2.y - self.pt1.y)
+        return Point((self.pt1.x + self.pt2.x)/2, (self.pt1.y + self.pt2.y)/2)
 
     def area(self):            # pole powierzchni
-        return abs(self.pt1.x - self.pt2.x) * abs(self.pt1.y - self.pt2.y)
+        return abs(self.pt2.x - self.pt1.x) * abs(self.pt2.y - self.pt1.y)
 
     def move(self, x, y):      # przesunięcie o (x, y)
         self.pt1.x += x
@@ -61,17 +61,17 @@ class TestRectangle(unittest.TestCase):
         self.assertTrue(rec1.__ne__(rec3))
     
     def testCenter(self):
-        rec = Rectangle(0, 0, 4, 4)
-        self.assertTrue(Point(2, 2), rec.center())
+        rec = Rectangle(2, 2, 4, 4)
+        self.assertEqual(Point(3, 3), rec.center())
     
     def testArea(self):
         rec = Rectangle(0, 0, 4, 4)
-        self.assertTrue(16, rec.area())
+        self.assertEqual(16, rec.area())
     
     def testMove(self):
         rec = Rectangle(0, 0, 4, 4)
         rec.move(2, 2)
-        self.assertTrue(Rectangle(2, 2, 6, 6), rec)
+        self.assertEqual(Rectangle(2, 2, 6, 6), rec)
 
 
 if __name__ == '__main__':
