@@ -37,11 +37,16 @@ class Rectangle:
         self.pt2.y += y
 
     def intersection(self, other):  # część wspólna prostokątów
-        if 
-        return Rectangle(other.pt1.x, other.pt1.y, self.pt2.x, self.pt2.y)
+        if self.pt1.x > other.pt1.x:
+            return other.intersection(self)
+        else:
+            return Rectangle(other.pt1.x, other.pt1.y, self.pt2.x, self.pt2.y)
 
     def cover(self, other):     # prostąkąt nakrywający oba
-        return Rectangle(self.pt1.x, self.pt1.y, other.pt2.x, other.pt2.y)
+        if self.pt1.x > other.pt1.x:
+            return other.cover(self)
+        else:
+            return Rectangle(self.pt1.x, self.pt1.y, other.pt2.x, other.pt2.y)
 
     def make4(self):           # zwraca krotkę czterech mniejszych
         center = center(self)
@@ -97,8 +102,10 @@ class TestRectangle(unittest.TestCase):
     def testIntersection(self):
         rec1 = Rectangle(0, 0, 4, 4)
         rec2 = Rectangle(2, 2, 6, 6)
+        rec3 = Rectangle(0, 2, 4, 4)
         self.assertEqual(Rectangle(2, 2, 4, 4), rec1.intersection(rec2))
         self.assertEqual(Rectangle(2, 2, 4, 4), rec2.intersection(rec1))
+        self.assertEqual(Rectangle(0, 2, 4, 4), rec1.intersection(rec3))
 
 
 if __name__ == '__main__':

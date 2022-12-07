@@ -21,12 +21,10 @@ class Point:
 
     # Punkty jako wektory 2D.
     def __add__(self, other):  # v1 + v2
-        self.x += other.x
-        self.y += other.y
+        return Point(self.x + other.x, self.y + other.y)
 
     def __sub__(self, other):  # v1 - v2
-        self.x -= other.x
-        self.y -= other.y
+        return Point(self.x - other.x, self.y - other.y)
 
     def __mul__(self, other):  # v1 * v2, iloczyn skalarny, zwraca liczbę
         return self.x * other.x + self.y * other.y
@@ -73,16 +71,14 @@ class TestPoint(unittest.TestCase):
     def testAdd(self):
         point1 = Point(1, 2)
         point2 = Point(1, 2)
-        point1.__add__(point2)
-        self.assertEqual(2, point1.x)
-        self.assertEqual(4, point1.y)
+        self.assertEqual(2, point1.__add__(point2).x)
+        self.assertEqual(4, point1.__add__(point2).y)
 
     def testSub(self):
         point1 = Point(2, 4)
         point2 = Point(1, 1)
-        point1.__sub__(point2)
-        self.assertEqual(1, point1.x)
-        self.assertEqual(3, point1.y)
+        self.assertEqual(1, point1.__sub__(point2).x)
+        self.assertEqual(3, point1.__sub__(point2).y)
     
     def testMul(self):
         point1 = Point(2, 4)
