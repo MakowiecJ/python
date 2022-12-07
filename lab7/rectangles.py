@@ -6,7 +6,7 @@ class Rectangle:
     def __init__(self, x1, y1, x2, y2):
     # Chcemy, aby x1 < x2, y1 < y2.
         if x1 > x2 or y1 > y2:
-            raise ValueError
+            raise ValueError("Values should be x1 < x2 and y1 < y2")
         else:
             self.pt1 = Point(x1, y1)
             self.pt2 = Point(x2, y2)
@@ -49,7 +49,7 @@ class Rectangle:
             return Rectangle(self.pt1.x, self.pt1.y, other.pt2.x, other.pt2.y)
 
     def make4(self):           # zwraca krotkę czterech mniejszych
-        center = center(self)
+        center = self.center()
         return(Rectangle(self.pt1.x, self.pt1.y, center.x, center.y), Rectangle(center.x, self.pt1.y, self.pt2.x, center.y), Rectangle(self.pt1.x, center.y, center.x, self.pt2.y), Rectangle(center.x, center.y, self.pt2.x, self.pt2.y))
 # A-------B   po podziale  A---+---B
 # |       |                |   |   |
@@ -62,6 +62,9 @@ class Rectangle:
 import unittest
 
 class TestRectangle(unittest.TestCase):
+    def testInit(self):
+        self.assertRaises(ValueError, Rectangle, 4, 4, 0, 0)
+
     def testStr(self):
         rec = Rectangle(0, 0, 4, 4)
         self.assertEqual('[(0, 0), (4, 4)]', rec.__str__())
@@ -107,6 +110,19 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(Rectangle(2, 2, 4, 4), rec2.intersection(rec1))
         self.assertEqual(Rectangle(0, 2, 4, 4), rec1.intersection(rec3))
 
+    def testCover(self):
+        rec1 = Rectangle(0, 0, 4, 4)
+        rec2 = Rectangle(2, 2, 6, 6)
+        self.assertEqual(Rectangle(0, 0, 6, 6), rec1.cover(rec2))
+        self.assertEqual(Rectangle(0, 0, 6, 6), rec2.cover(rec1))
+    
+    def testMake4(self):
+        rec = Rectangle(0, 0, 4, 4)
+        rects = rec.make4()
+        self.assertTrue(Rectangle(0,0,2,2) in rects)
+        self.assertTrue(Rectangle(2,0,4,2) in rects)
+        self.assertTrue(Rectangle(2,2,4,4) in rects)
+        self.assertTrue(Rectangle(0,2,2,4) in rects)
 
 if __name__ == '__main__':
     unittest.main()
