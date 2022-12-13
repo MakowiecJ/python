@@ -10,7 +10,49 @@ class Rectangle:
         else:
             self.pt1 = Point(x1, y1)
             self.pt2 = Point(x2, y2)
-        
+    
+    def from_points(points):
+        return Rectangle(points[0].x, points[0].y, points[1].x, points[1].y)
+    
+    @property
+    def top(self):
+        return self.pt2.y
+    
+    @property
+    def left(self):
+        return self.pt1.x
+    
+    @property
+    def bottom(self):
+        return self.pt1.y
+    
+    @property
+    def right(self):
+        return self.pt2.x
+    
+    @property
+    def width(self):
+        return self.pt2.x - self.pt1.x
+    
+    @property
+    def height(self):
+        return self.pt2.y - self.pt1.y
+    
+    @property
+    def topLeft(self):
+        return Point(self.pt1.x, self.pt2.y)
+    
+    @property
+    def bottomLeft(self):
+        return self.pt1
+    
+    @property
+    def topRight(self):
+        return self.pt2
+    
+    @property
+    def bottomRight(self):
+        return Point(self.pt2.x, self.pt1.y)
 
     def __str__(self):         # "[(x1, y1), (x2, y2)]"
         return '[({}, {}), ({}, {})]'.format(self.pt1.x, self.pt1.y, self.pt2.x, self.pt2.y)
@@ -24,6 +66,7 @@ class Rectangle:
     def __ne__(self, other):        # obsługa rect1 != rect2
         return not self == other
 
+    @property
     def center(self):          # zwraca środek prostokąta
         return Point((self.pt1.x + self.pt2.x)/2, (self.pt1.y + self.pt2.y)/2)
 
@@ -49,80 +92,10 @@ class Rectangle:
             return Rectangle(self.pt1.x, self.pt1.y, other.pt2.x, other.pt2.y)
 
     def make4(self):           # zwraca krotkę czterech mniejszych
-        center = self.center()
+        center = self.center
         return(Rectangle(self.pt1.x, self.pt1.y, center.x, center.y), Rectangle(center.x, self.pt1.y, self.pt2.x, center.y), Rectangle(self.pt1.x, center.y, center.x, self.pt2.y), Rectangle(center.x, center.y, self.pt2.x, self.pt2.y))
 # A-------B   po podziale  A---+---B
 # |       |                |   |   |
 # |       |                +---+---+
 # |       |                |   |   |
 # D-------C                D---+---C
-
-# Kod testujący moduł.
-
-import unittest
-
-class TestRectangle(unittest.TestCase):
-    def testInit(self):
-        self.assertRaises(ValueError, Rectangle, 4, 4, 0, 0)
-
-    def testStr(self):
-        rec = Rectangle(0, 0, 4, 4)
-        self.assertEqual('[(0, 0), (4, 4)]', rec.__str__())
-
-    def testRepr(self):
-        rec = Rectangle(0, 0, 4, 4)
-        self.assertEqual('Rectangle(0, 0, 4, 4)', rec.__repr__())
-
-    def testEq(self):
-        rec1 = Rectangle(0, 0, 4, 4)
-        rec2 = Rectangle(0, 0, 4, 4)
-        rec3 = Rectangle(0, 0, 5, 5)
-        self.assertTrue(rec1.__eq__(rec2))
-        self.assertTrue(rec1 == rec2)
-        self.assertFalse(rec1.__eq__(rec3))
-        self.assertFalse(rec1 == rec3)
-    
-    def testNe(self):
-        rec1 = Rectangle(0, 0, 4, 4)
-        rec2 = Rectangle(0, 0, 4, 4)
-        rec3 = Rectangle(0, 0, 5, 5)
-        self.assertFalse(rec1.__ne__(rec2))
-        self.assertTrue(rec1.__ne__(rec3))
-    
-    def testCenter(self):
-        rec = Rectangle(2, 2, 4, 4)
-        self.assertEqual(Point(3, 3), rec.center())
-    
-    def testArea(self):
-        rec = Rectangle(0, 0, 4, 4)
-        self.assertEqual(16, rec.area())
-    
-    def testMove(self):
-        rec = Rectangle(0, 0, 4, 4)
-        rec.move(2, 2)
-        self.assertEqual(Rectangle(2, 2, 6, 6), rec)
-
-    def testIntersection(self):
-        rec1 = Rectangle(0, 0, 4, 4)
-        rec2 = Rectangle(2, 2, 6, 6)
-        rec3 = Rectangle(0, 2, 4, 4)
-        self.assertEqual(Rectangle(2, 2, 4, 4), rec1.intersection(rec2))
-        self.assertEqual(Rectangle(2, 2, 4, 4), rec2.intersection(rec1))
-        self.assertEqual(Rectangle(0, 2, 4, 4), rec1.intersection(rec3))
-
-    def testCover(self):
-        rec1 = Rectangle(0, 0, 4, 4)
-        rec2 = Rectangle(2, 2, 6, 6)
-        self.assertEqual(Rectangle(0, 0, 6, 6), rec1.cover(rec2))
-        self.assertEqual(Rectangle(0, 0, 6, 6), rec2.cover(rec1))
-    
-    def testMake4(self):
-        rec = Rectangle(0, 0, 4, 4)
-        rects = rec.make4()
-        self.assertTrue(Rectangle(0,0,2,2) in rects)
-        self.assertTrue(Rectangle(2,0,4,2) in rects)
-        self.assertTrue(Rectangle(2,2,4,4) in rects)
-        self.assertTrue(Rectangle(0,2,2,4) in rects)
-
-if __name__ == '__main__':
-    unittest.main()
