@@ -11,6 +11,7 @@ class Rectangle:
             self.pt1 = Point(x1, y1)
             self.pt2 = Point(x2, y2)
     
+    @staticmethod
     def from_points(points):
         return Rectangle(points[0].x, points[0].y, points[1].x, points[1].y)
     

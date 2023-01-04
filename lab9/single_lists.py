@@ -45,25 +45,38 @@ class SingleList:
             raise ValueError('Lista jest pusta')
 
         node = self.head
+        if self.head == self.tail:
+            self.head = self.tail = None
+            self.length -=1
+            return node
+
         while node.next != self.tail:
             node = node.next
 
         deletedNode = node.next
         node.next = None
+        self.tail = node
         self.length -= 1
         return deletedNode
         # Zwraca cały węzeł, skraca listę.
         # Dla pustej listy rzuca wyjątek ValueError.
 
     def join(self, other):   # klasy O(1)
-        self.tail.next = other.head
-        self.tail = other.tail
-        self.length += other.length
-        other.clear()
+        if self.is_empty():
+            self.head = other.head
+            self.tail = other.tail
+            self.length = other.length
+            other.clear()
+        else:
+            self.tail.next = other.head
+            self.tail = other.tail
+            self.length += other.length
+            other.clear()
         # Węzły z listy other są przepinane do listy self na jej koniec.
         # Po zakończeniu operacji lista other ma być pusta.
 
     def clear(self):   # czyszczenie listy
         self.head = None
         self.tail = None
-        self.lenght = 0
+        self.length = 0
+    
