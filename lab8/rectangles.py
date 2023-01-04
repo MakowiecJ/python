@@ -80,16 +80,10 @@ class Rectangle:
         self.pt2.y += y
 
     def intersection(self, other):  # część wspólna prostokątów
-        if self.pt1.x > other.pt1.x:
-            return other.intersection(self)
-        else:
-            return Rectangle(other.pt1.x, other.pt1.y, self.pt2.x, self.pt2.y)
+        return Rectangle(max(self.pt1.x, other.pt1.x), max(self.pt1.y, other.pt1.y), min(self.pt2.x, other.pt2.x), min(self.pt2.y, other.pt2.y))
 
     def cover(self, other):     # prostąkąt nakrywający oba
-        if self.pt1.x > other.pt1.x:
-            return other.cover(self)
-        else:
-            return Rectangle(self.pt1.x, self.pt1.y, other.pt2.x, other.pt2.y)
+        return Rectangle(min(self.pt1.x, other.pt1.x), min(self.pt1.y, other.pt1.y), max(self.pt2.x, other.pt2.x), max(self.pt2.y, other.pt2.y))
 
     def make4(self):           # zwraca krotkę czterech mniejszych
         center = self.center
