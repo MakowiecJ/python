@@ -23,7 +23,6 @@ class RandomQueue:
         return len(self.items) == 0
 
     def is_full(self):
-        # List is never full
         return False
 
     def clear(self):
