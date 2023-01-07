@@ -1,51 +1,67 @@
-import tkinter as tk
+from nodes import Node
 
-class MobilePhone(tk.Tk):
+
+class T9:
     def __init__(self):
-        super().__init__()
+        self.root = Node()
+        with open('english.txt', 'r') as f:
+            for word in f:
+                word = word.lower().strip()
+                self.insert(self.root, word, 0)
+        print("Loaded dictionary")
 
-        # Set the title and size of the window
-        self.title("Mobile Phone")
-        self.geometry("400x700")
+    def get_root(self):
+        return self.root
 
-        # Create a label to display the screen
-        self.screen = tk.Label(self, text="", font=("Arial", 20))
-        self.screen.pack()
+    def insert(self, node, word, index):
+        if index == len(word) and node is not None:
+            node.words.append(word)
+            return
 
-        # Create a frame to hold the keypad buttons
-        self.keypad_frame = tk.Frame(self)
-        self.keypad_frame.pack()
+        c = word[index]
+        if c in 'abc':
+            if node.nodes[0] is None:
+                node.nodes[0] = Node()
+            node = node.nodes[0]
+            self.insert(node, word, index + 1)
+        elif c in 'def':
+            if node.nodes[1] is None:
+                node.nodes[1] = Node()
+            node = node.nodes[1]
+            self.insert(node, word, index + 1)
+        elif c in 'ghi':
+            if node.nodes[2] is None:
+                node.nodes[2] = Node()
+            node = node.nodes[2]
+            self.insert(node, word, index + 1)
+        elif c in 'jkl':
+            if node.nodes[3] is None:
+                node.nodes[3] = Node()
+            node = node.nodes[3]
+            self.insert(node, word, index + 1)
+        elif c in 'mno':
+            if node.nodes[4] is None:
+                node.nodes[4] = Node()
+            node = node.nodes[4]
+            self.insert(node, word, index + 1)
+        elif c in 'pqrs':
+            if node.nodes[5] is None:
+                node.nodes[5] = Node()
+            node = node.nodes[5]
+            self.insert(node, word, index + 1)
+        elif c in 'tuv':
+            if node.nodes[6] is None:
+                node.nodes[6] = Node()
+            node = node.nodes[6]
+            self.insert(node, word, index + 1)
+        elif c in 'wxyz':
+            if node.nodes[7] is None:
+                node.nodes[7] = Node()
+            node = node.nodes[7]
+            self.insert(node, word, index + 1)
+        else:
+            print("Insertion Error")
+            print(f"word: {word} index: {index}")
 
-        # Create the keypad buttons
-        self.keypad_buttons = []
-        for i in range(1, 10):
-            button = tk.Button(self.keypad_frame, text=str(i), command=lambda i=i: self.add_digit(i), height=5, width=3)
-            button.grid(row=(i - 1) // 3, column=(i - 1) % 3)
-            self.keypad_buttons.append(button)
-        tk.Button(self.keypad_frame, text="*", command=self.add_star, height=3, width=3).grid(row=3, column=0)
-        tk.Button(self.keypad_frame, text="0", command=lambda: self.add_digit(0), height=3, width=3).grid(row=3, column=1)
-        tk.Button(self.keypad_frame, text="#", command=self.add_pound, height=3, width=3).grid(row=3, column=2)
-
-        # Create a button to clear the screen
-        self.clear_button = tk.Button(self, text="Clear", command=self.clear_screen, height=3, width=3)
-        self.clear_button.pack()
-
-    def add_digit(self, digit):
-        # Update the screen with the new digit
-        self.screen.config(text=self.screen.cget("text") + str(digit))
-
-    def add_star(self):
-        # Update the screen with the star character
-        self.screen.config(text=self.screen.cget("text") + "*")
-
-    def add_pound(self):
-        # Update the screen with the pound character
-        self.screen.config(text=self.screen.cget("text") + "#")
-
-    def clear_screen(self):
-        # Clear the screen
-        self.screen.config(text="")
-
-# Create and run the mobile phone GUI
-app = MobilePhone()
-app.mainloop()
+    def getRoot(self):
+        return self.root
