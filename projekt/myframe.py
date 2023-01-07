@@ -1,11 +1,12 @@
 import tkinter as tk
 from t9 import T9
 
+
 class MyFrame(tk.Frame):
 
-    def __init__(self, root):
+    def __init__(self, root, words):
         tk.Frame.__init__(self, root)
-        self.t9 = T9()
+        self.t9 = T9(words)
         self.current_node = self.t9.getRoot()
 
         button_frame = tk.Frame(self)
@@ -47,14 +48,14 @@ class MyFrame(tk.Frame):
         self.ok_button.grid(row=0, column=1, sticky=tk.W + tk.E + tk.S)
         self.del_button.grid(row=0, column=2, sticky=tk.W + tk.E + tk.S)
         self.change_button.grid(row=1, column=0, sticky=tk.W + tk.E + tk.S)
-        self.b2.grid(row=1, column=1, sticky=tk.W+tk.E+tk.S)
-        self.b3.grid(row=1, column=2, sticky=tk.W+tk.E+tk.S)
-        self.b4.grid(row=2, column=0, sticky=tk.W+tk.E+tk.S)
-        self.b5.grid(row=2, column=1, sticky=tk.W+tk.E+tk.S)
-        self.b6.grid(row=2, column=2, sticky=tk.W+tk.E+tk.S)
-        self.b7.grid(row=3, column=0, sticky=tk.W+tk.E+tk.S)
-        self.b8.grid(row=3, column=1, sticky=tk.W+tk.E+tk.S)
-        self.b9.grid(row=3, column=2, sticky=tk.W+tk.E+tk.S)
+        self.b2.grid(row=1, column=1, sticky=tk.W + tk.E + tk.S)
+        self.b3.grid(row=1, column=2, sticky=tk.W + tk.E + tk.S)
+        self.b4.grid(row=2, column=0, sticky=tk.W + tk.E + tk.S)
+        self.b5.grid(row=2, column=1, sticky=tk.W + tk.E + tk.S)
+        self.b6.grid(row=2, column=2, sticky=tk.W + tk.E + tk.S)
+        self.b7.grid(row=3, column=0, sticky=tk.W + tk.E + tk.S)
+        self.b8.grid(row=3, column=1, sticky=tk.W + tk.E + tk.S)
+        self.b9.grid(row=3, column=2, sticky=tk.W + tk.E + tk.S)
 
         button_frame.pack(fill='both', padx=10, pady=10)
 
@@ -70,7 +71,6 @@ class MyFrame(tk.Frame):
         self.label1_text.set("")
         self.check_words()
 
-
     def reset_clicked(self):
         self.current_node = self.t9.get_root()
         self.label1_text.set("")
@@ -82,7 +82,7 @@ class MyFrame(tk.Frame):
             if len(self.current_node.words) > 1:
                 self.current_node.words.append(self.current_node.words.pop(0))
                 self.label1_text.set(self.current_node.words[0])
-    
+
     def b2_clicked(self):
         if self.current_node.nodes[0] is None:
             self.label1_text.set("No such word in the dictionary")
@@ -104,7 +104,7 @@ class MyFrame(tk.Frame):
         else:
             self.label1_text.set(self.label1_text.get() + "d")
         self.check_words()
-    
+
     def b4_clicked(self):
         if self.current_node.nodes[2] is None:
             self.label1_text.set("No such word in the dictionary")
@@ -159,7 +159,7 @@ class MyFrame(tk.Frame):
         else:
             self.label1_text.set(self.label1_text.get() + "t")
         self.check_words()
-    
+
     def b9_clicked(self):
         if self.current_node.nodes[7] is None:
             self.label1_text.set("No such word in the dictionary")

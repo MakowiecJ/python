@@ -2,9 +2,9 @@ from nodes import Node
 
 
 class T9:
-    def __init__(self):
+    def __init__(self, words):
         self.root = Node()
-        with open('english.txt', 'r') as f:
+        with open(words, 'r') as f:
             for word in f:
                 word = word.lower().strip()
                 self.insert(self.root, word, 0)
