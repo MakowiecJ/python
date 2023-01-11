@@ -9,7 +9,7 @@ Jeśli któryś z podwęzłów jest nullem, oznacza to że wciśnięcie klawisza
 
 Aplikacja nie przewiduje w przyszłość (chodzi o sytuację, gdy nie dokończymy całego słowa, ale już jednoznacznie wiadomo o jakie słowo chodzi), choć można by to zaimplementować sprawdzając w każdym kroku wszystkie podwęzły i wszystkie listy słów, czy znajduje się dokładnie jedno słowo w tym zbiorze. 
 
-#### Na chwilę obecną musimy wcisnąć dokładnie tyle klawiszy ile literek ma nasze słówko np. "hello" - klawisze 4,3,5,5,6.
+### Na chwilę obecną musimy wcisnąć dokładnie tyle klawiszy ile literek ma nasze słówko np. "hello" - klawisze 4,3,5,5,6.
 
 Graficzny interfejs oparty jest na tkinter, podczas wciskania klawiszy podświetlać się będą na zielono 2 przyciski, których wciśnięcie spowoduję akcję opisaną na przycisku, chodzi o przycisk „ok” który zatwierdza słowo o ile takie istnieje oraz przycisk „change” który zmienia słowo, jeśli w danym węźle znajduje się więcej słów, które odpowiadają wciśniętej kombinacji.
 
