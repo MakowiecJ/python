@@ -7,7 +7,7 @@ class MyFrame(tk.Frame):
     def __init__(self, root, words):
         tk.Frame.__init__(self, root)
         self.t9 = T9(words)
-        self.current_node = self.t9.getRoot()
+        self.current_node = self.t9.get_root()
 
         button_frame = tk.Frame(self)
 
@@ -29,18 +29,18 @@ class MyFrame(tk.Frame):
         self.label1.pack(padx=20, pady=20)
         self.label2.pack(padx=20, pady=20)
 
-        self.ok_button = tk.Button(button_frame, height=4, text="OK", command=self.ok_clicked)
-        self.del_button = tk.Button(button_frame, height=4, text="DEL", command=self.del_clicked)
-        self.reset_button = tk.Button(button_frame, height=4, text="RESET", command=self.reset_clicked)
-        self.change_button = tk.Button(button_frame, height=4, text="1\nchange", command=self.change_clicked)
-        self.b2 = tk.Button(button_frame, height=4, text="2\nabc", command=self.b2_clicked)
-        self.b3 = tk.Button(button_frame, height=4, text="3\ndef", command=self.b3_clicked)
-        self.b4 = tk.Button(button_frame, height=4, text="4\nghi", command=self.b4_clicked)
-        self.b5 = tk.Button(button_frame, height=4, text="5\njkl", command=self.b5_clicked)
-        self.b6 = tk.Button(button_frame, height=4, text="6\nmno", command=self.b6_clicked)
-        self.b7 = tk.Button(button_frame, height=4, text="7\npqrs", command=self.b7_clicked)
-        self.b8 = tk.Button(button_frame, height=4, text="8\ntuv", command=self.b8_clicked)
-        self.b9 = tk.Button(button_frame, height=4, text="9\nwxyz", command=self.b9_clicked)
+        self.ok_button = tk.Button(button_frame, height=4, width=4, text="OK", command=self.ok_clicked)
+        self.del_button = tk.Button(button_frame, height=4, width=4, text="DEL", command=self.del_clicked)
+        self.reset_button = tk.Button(button_frame, height=4, width=4, text="RESET", command=self.reset_clicked)
+        self.change_button = tk.Button(button_frame, height=4, width=4, text="1\nchange", command=self.change_clicked)
+        self.b2 = tk.Button(button_frame, height=4, width=4, text="2\nabc", command=self.b2_clicked)
+        self.b3 = tk.Button(button_frame, height=4, width=4, text="3\ndef", command=self.b3_clicked)
+        self.b4 = tk.Button(button_frame, height=4, width=4, text="4\nghi", command=self.b4_clicked)
+        self.b5 = tk.Button(button_frame, height=4, width=4, text="5\njkl", command=self.b5_clicked)
+        self.b6 = tk.Button(button_frame, height=4, width=4, text="6\nmno", command=self.b6_clicked)
+        self.b7 = tk.Button(button_frame, height=4, width=4, text="7\npqrs", command=self.b7_clicked)
+        self.b8 = tk.Button(button_frame, height=4, width=4, text="8\ntuv", command=self.b8_clicked)
+        self.b9 = tk.Button(button_frame, height=4, width=4, text="9\nwxyz", command=self.b9_clicked)
 
         self.orig_color = self.change_button.cget("background")
 
@@ -84,10 +84,10 @@ class MyFrame(tk.Frame):
                 self.label1_text.set(self.current_node.words[0])
 
     def b2_clicked(self):
-        if self.current_node.nodes[0] is None:
+        if self.current_node.node_dict["b2"] is None:
             self.label1_text.set("No such word in the dictionary")
             return
-        self.current_node = self.current_node.nodes[0]
+        self.current_node = self.current_node.node_dict["b2"]
         if self.current_node.words:
             self.label1_text.set(self.current_node.words[0])
         else:
@@ -95,10 +95,10 @@ class MyFrame(tk.Frame):
         self.check_words()
 
     def b3_clicked(self):
-        if self.current_node.nodes[1] is None:
+        if self.current_node.node_dict["b3"] is None:
             self.label1_text.set("No such word in the dictionary")
             return
-        self.current_node = self.current_node.nodes[1]
+        self.current_node = self.current_node.node_dict["b3"]
         if self.current_node.words:
             self.label1_text.set(self.current_node.words[0])
         else:
@@ -106,10 +106,10 @@ class MyFrame(tk.Frame):
         self.check_words()
 
     def b4_clicked(self):
-        if self.current_node.nodes[2] is None:
+        if self.current_node.node_dict["b4"] is None:
             self.label1_text.set("No such word in the dictionary")
             return
-        self.current_node = self.current_node.nodes[2]
+        self.current_node = self.current_node.node_dict["b4"]
         if self.current_node.words:
             self.label1_text.set(self.current_node.words[0])
         else:
@@ -117,10 +117,10 @@ class MyFrame(tk.Frame):
         self.check_words()
 
     def b5_clicked(self):
-        if self.current_node.nodes[3] is None:
+        if self.current_node.node_dict["b5"] is None:
             self.label1_text.set("No such word in the dictionary")
             return
-        self.current_node = self.current_node.nodes[3]
+        self.current_node = self.current_node.node_dict["b5"]
         if self.current_node.words:
             self.label1_text.set(self.current_node.words[0])
         else:
@@ -128,10 +128,10 @@ class MyFrame(tk.Frame):
         self.check_words()
 
     def b6_clicked(self):
-        if self.current_node.nodes[4] is None:
+        if self.current_node.node_dict["b6"] is None:
             self.label1_text.set("No such word in the dictionary")
             return
-        self.current_node = self.current_node.nodes[4]
+        self.current_node = self.current_node.node_dict["b6"]
         if self.current_node.words:
             self.label1_text.set(self.current_node.words[0])
         else:
@@ -139,10 +139,10 @@ class MyFrame(tk.Frame):
         self.check_words()
 
     def b7_clicked(self):
-        if self.current_node.nodes[5] is None:
+        if self.current_node.node_dict["b7"] is None:
             self.label1_text.set("No such word in the dictionary")
             return
-        self.current_node = self.current_node.nodes[5]
+        self.current_node = self.current_node.node_dict["b7"]
         if self.current_node.words:
             self.label1_text.set(self.current_node.words[0])
         else:
@@ -150,10 +150,10 @@ class MyFrame(tk.Frame):
         self.check_words()
 
     def b8_clicked(self):
-        if self.current_node.nodes[6] is None:
+        if self.current_node.node_dict["b8"] is None:
             self.label1_text.set("No such word in the dictionary")
             return
-        self.current_node = self.current_node.nodes[6]
+        self.current_node = self.current_node.node_dict["b8"]
         if self.current_node.words:
             self.label1_text.set(self.current_node.words[0])
         else:
@@ -161,10 +161,10 @@ class MyFrame(tk.Frame):
         self.check_words()
 
     def b9_clicked(self):
-        if self.current_node.nodes[7] is None:
+        if self.current_node.node_dict["b9"] is None:
             self.label1_text.set("No such word in the dictionary")
             return
-        self.current_node = self.current_node.nodes[7]
+        self.current_node = self.current_node.node_dict["b9"]
         if self.current_node.words:
             self.label1_text.set(self.current_node.words[0])
         else:
